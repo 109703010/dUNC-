@@ -53,45 +53,93 @@ class _MyHomePageState extends State<MyHomePage> {
           const SizedBox(  // 為了避開螢幕的最上方
             height: 50,
           ),
-          
-          NeumorphicToggle(  // 「找球隊/球員、找比賽」
-            children: [
-              ToggleElement(
-                foreground: Center(child: NeumorphicText(
-                  '找球隊/球員',
-                  style: const NeumorphicStyle(color: Colors.white),
-                ),),
-                background: Center(child: NeumorphicText(
-                  '找球隊/球員',
-                  style: const NeumorphicStyle(color: Colors.black),
-                ),),
-              ),
-              ToggleElement(
-                foreground: Center(child: NeumorphicText(
-                  '找比賽',
-                  style: const NeumorphicStyle(color: Colors.white),
-                ),),
-                background: Center(child: NeumorphicText(
-                  '找比賽',
-                  style: const NeumorphicStyle(color: Colors.black),
-                ),)
-              )
-            ],
 
-            thumb: Container(  // 已被選擇的項目的樣式
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.bottomLeft,
-                  end: Alignment.topRight,
-                  colors: [blue, purple]
-                ),
-              )
+          Neumorphic(
+            style: NeumorphicStyle(
+              color: Colors.white,
+              shape: NeumorphicShape.flat,
+              depth: -20,
+              intensity: 1,
+              surfaceIntensity: 0,
+              boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.all(Radius.circular(20))),
             ),
+            child: NeumorphicToggle(  // 「找球隊/球員、找比賽」
+              children: [
+                ToggleElement(
+                  foreground: Center(child: NeumorphicText(
+                    '找球隊/球員',
+                    style: const NeumorphicStyle(color: Colors.white),
+                  ),),
+                  background: Center(child: NeumorphicText(
+                    '找球隊/球員',
+                    style: const NeumorphicStyle(color: Colors.black),
+                  ),),
+                ),
+                ToggleElement(
+                  foreground: Center(child: NeumorphicText(
+                    '找比賽',
+                    style: const NeumorphicStyle(color: Colors.white),
+                  ),),
+                  background: Center(child: NeumorphicText(
+                    '找比賽',
+                    style: const NeumorphicStyle(color: Colors.black),
+                  ),)
+                )
+              ],
 
-            style: const NeumorphicToggleStyle(
-              backgroundColor: Colors.white54,  // 沒被選擇的項目背景顏色
-              lightSource: LightSource(0.6, 0.6),
-              borderRadius: BorderRadius.all(Radius.circular(20))  // 選中項目
+              thumb: Container(  // 已被選擇的項目的樣式
+                foregroundDecoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    colors: [blue, purple]
+                  ),
+                ),
+              ),
+
+              style: const NeumorphicToggleStyle(
+                backgroundColor: Colors.white54,  // 沒被選擇的項目背景顏色
+                lightSource: LightSource(-0.6, -0.6),
+                borderRadius: BorderRadius.all(Radius.circular(20)),  // 選中項目
+              ),
+            )
+          ),
+          const SizedBox(height: 25,),
+          Neumorphic(
+            style: NeumorphicStyle(
+              color: Colors.white,
+              shape: NeumorphicShape.flat,
+              depth: -20,
+              intensity: 1,
+              surfaceIntensity: 0,
+              boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.all(Radius.circular(20))),
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  return SizedBox(
+                    width: constraints.maxWidth,
+                    child: constraints.maxWidth == double.infinity
+                        ? null
+                        : Row(
+                          children: [
+                            const Icon(
+                              Icons.search,
+                              color: Colors.grey,
+                            ),
+                            // TextField(
+                            //   decoration: null,
+                            //   keyboardType: TextInputType.name,
+                            //   textInputAction: TextInputAction.search,
+                            //   autofocus: true,
+                            //   onChanged: (str) {}, //todo
+                            // )
+                          ],
+                        )
+                  );
+                }
+              )
             ),
           )
         ],
